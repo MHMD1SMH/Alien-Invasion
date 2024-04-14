@@ -22,6 +22,7 @@ public:
 	int getPower() const { return Power; };
 
 	void setHealth(int Health) { this->Health = Health; };
+	void decHel(int n) { this->Health -= n; };
 	int getHealth() const { return Health; };
 
 	void setAttackCapacity(int Cap) { this->AttackCapacity = Cap; };

@@ -1,6 +1,7 @@
 #pragma once
 #include "Unit.h"
 #include "DoubleQueue.h"
+#include <iostream>
 
 class Drone : public Unit
 {
@@ -8,23 +9,37 @@ public:
 	Drone() {
 		this->setType("Drone");
 	};
-	bool Attack(Unit K) {
-		if (!(K.getType() == "Tank" || K.getType() == "Gunnery"))
+	Drone(Drone* K) {
+		this->setType(K->getType());
+		this->setAttackCapacity(K->getAttackCapacity());
+		this->setHealth(K->getHealth());
+		this->setPower(K->getPower());
+	}
+	virtual bool Attack(Unit* K) override {
+		if (!(K->getType() == "Tank" || K->getType() == "Gunnery"))
 			return false;
 
-		K.decHel((this->getPower()));
+		K->decHel((this->getPower()));
 
 		return true;
 
 	}
 };
 
-class Drones {
-private:
-	DoubleQueue<Drone> drones;
+class Drones : public DoubleQueue<Drone>
+{
 public:
-	Drones();
-	bool isEmpty() { return drones.isEmpty(); }
-	void enqueue(Drone& x) { drones.enqueue(x); }
-	bool deqfront(){}
+	void PrintQueue() {
+		Drone K;
+		DoubleNode<Drone>* ptr;
+		ptr = this->getFrnt();
+		while (ptr)
+		{
+			K = ptr->getItem();
+			cout << K.getType() << " ID :"  << "power :" << K.getPower() << endl;
+			ptr =ptr->getNext();
+		}
+		cout << endl;
+	}
 };
+

@@ -12,6 +12,7 @@ private:
 	DoubleNode<T>* frontPtr;
 public:
 	DoubleQueue();
+	DoubleNode<T>* getFrnt() { return frontPtr; }
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
 	bool dequeueFront(T& frntEntry);
@@ -96,7 +97,11 @@ bool DoubleQueue<T>::dequeueFront(T& frntEntry)
 	DoubleNode<T>* nodeToDeletePtr = frontPtr;
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
-	frontPtr->setprev(NULL);
+	if (frontPtr)
+	{
+		frontPtr->setprev(NULL);
+	}
+
 	// Queue is not empty; remove front
 	if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue
 		backPtr = nullptr;
@@ -115,7 +120,7 @@ bool DoubleQueue<T>::dequeueBack(T& backEntry)
 
 	DoubleNode<T>* nodeToDeletePtr = backPtr;
 	backEntry = backPtr->getItem();
-	backPtr = backPtr->getPrev();
+	backPtr = backPtr->getprev();
 	backPtr->setNext(NULL);
 	// Queue is not empty; remove Back
 	if (nodeToDeletePtr == frontPtr)	 // Special case: first node in the queue
@@ -152,7 +157,7 @@ void DoubleQueue<T>::PrintQueue()
 {
 	T K;
 	cout << "\nQueue contents: ";
-	while (this->dequeue(K))
+	while (this->dequeueFront(K))
 		cout << K << " ";
 	cout << endl;
 }

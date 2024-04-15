@@ -66,10 +66,10 @@ DoubleNode<T>* DoubleNode<T>::getNext() const
 	return next;
 }
 
-template<typename T>
-void DoubleNode<T>::setprev(DoubleNode<T>* prevNodePtr)
+template<typename t>
+void DoubleNode<t>::setprev(DoubleNode<t>* prevnodeptr)
 {
-	prev = prevNodePtr;
+	prev = prevnodeptr;
 }
 
 template<typename T>

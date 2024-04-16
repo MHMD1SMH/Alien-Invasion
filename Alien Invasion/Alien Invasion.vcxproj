@@ -130,7 +130,12 @@
     <ClInclude Include="DoubleNode.h" />
     <ClInclude Include="DoubleQueue.h" />
     <ClInclude Include="Drone.h" />
+    <ClInclude Include="earthArmy.h" />
+    <ClInclude Include="earthGunnery.h" />
+    <ClInclude Include="earthTanks.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="priNode.h" />
+    <ClInclude Include="priQueue.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Unit.h" />

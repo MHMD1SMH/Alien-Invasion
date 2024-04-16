@@ -36,6 +36,21 @@
     <ClInclude Include="Drone.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="priNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="priQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="earthTanks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="earthGunnery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="earthArmy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

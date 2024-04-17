@@ -21,6 +21,7 @@ public:
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
+		this->setID(K->getID());
 	}
 	virtual bool Attack(Unit* K) override {
 		float Damage = (this->getPower() * (this->getHealth() / 100)) / (sqrt(K->getHealth()));
@@ -45,14 +46,14 @@ public:
 		Drone K;
 		DoubleNode<Drone>* ptr;
 		ptr = this->getFrnt();
-		cout << "Drones Army\n";
+		cout << "\n" << this->getCounter() << " AD" << " [";
 		while (ptr)
 		{
 			K = ptr->getItem();
-			cout << K.getType() << " ID :"<<  "power :" << K.getPower() << endl;
+			cout << '\t' << K.getID() << ',';
 			ptr =ptr->getNext();
 		}
-		cout << endl;
+		cout << "]" << endl;
 	}
 };
 

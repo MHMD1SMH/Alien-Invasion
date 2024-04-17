@@ -13,7 +13,7 @@ public:
         setType("ET");
         setID(id);
     };
-    virtual bool Attack(Unit* target) {
+    virtual bool Attack(Unit* target) override {
         float Damage = (this->getPower() * (this->getHealth() / 100.0)) / (sqrt(target->getHealth()));
         if (target) {
             target->decHel(Damage);
@@ -44,11 +44,12 @@ public:
     };
     void etState() {
         LinkedStack <earthTanks*> tTanks = tanks;
-        cout << "\nEarth Tanks units ";
-        while (tTanks.Print(tET)) {
-            cout << '\t' << tET->getAttackCapacity();
-        }
+        cout << "\n" << tTanks.getCounter() << " ET" << " [";
 
+        while (tTanks.Print(tET)) {
+            cout << '\t' << tET->getID() << ',';
+        }
+        cout << "]";
     };
 
 

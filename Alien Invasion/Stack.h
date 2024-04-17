@@ -13,9 +13,10 @@ public:
 	LinkedStack();
 	bool isEmpty() const;
 	bool Push(const T& newEntry);
-	bool Pop(T& frntEntry);
+	T* Pop();
 	bool peek(T& frntEntry)  const;
 	void PrintStack();
+	int getCounter();
 	bool Print(T& frntEntry);
 	~LinkedStack();
 };
@@ -24,8 +25,9 @@ public:
 /*
 Function: Satck()
 The constructor of the Stack class.
-
 */
+template <typename T>
+int LinkedStack<T>::getCounter() {return counter;}
 
 template <typename T>
 LinkedStack<T>::LinkedStack()
@@ -83,13 +85,13 @@ Output: True if the operation is successful; otherwise false.
 */
 
 template <typename T>
-bool LinkedStack<T>::Pop(T& frntEntry)
+T* LinkedStack<T>::Pop()
 {
 	if (isEmpty())
-		return false;
+		return NULL;
 
 	Node<T>* nodeToDeletePtr = frontPtr;
-	frntEntry = frontPtr->getItem();
+	T* item = new T(frontPtr->getItem());
 	frontPtr = frontPtr->getNext();
 	// Stack is not empty; remove front
 
@@ -97,7 +99,7 @@ bool LinkedStack<T>::Pop(T& frntEntry)
 	// Free memory reserved for the deleted node
 	delete nodeToDeletePtr;
 	this->counter--;
-	return true;
+	return item;
 }
 
 
@@ -150,7 +152,7 @@ LinkedStack<T>::~LinkedStack()
 {
 
 	T temp;
-	while (Pop(temp));
+	while (Pop());
 
 }
 

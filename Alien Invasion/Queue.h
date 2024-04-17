@@ -8,16 +8,19 @@ using namespace std;
 template <typename T>
 class LinkedQueue
 {
-private:
+protected:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
+	int counter = 0;
 public:
 	LinkedQueue();
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
-	bool dequeue(T& frntEntry);
+	T* dequeue();
 	bool peek(T& frntEntry)  const;
 	void PrintQueue();
+	Node<T>* getFrnt() { return frontPtr; }
+	int getCounter() { return counter; }
 	~LinkedQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -62,14 +65,16 @@ Output: True if the operation is successful; otherwise false.
 template <typename T>
 bool LinkedQueue<T>::enqueue(const T& newEntry)
 {
+	
 	Node<T>* newNodePtr = new Node<T>(newEntry);
 	// Insert the new node
 	if (isEmpty())	//special case if this is the first node to insert
-		frontPtr = newNodePtr; // The queue is empty
+		frontPtr=backPtr = newNodePtr; // The queue is empty
 	else
 		backPtr->setNext(newNodePtr); // The queue was not empty
 
 	backPtr = newNodePtr; // New node is the last node now
+	counter++;
 	return true;
 } // end enqueue
 
@@ -85,23 +90,23 @@ Output: True if the operation is successful; otherwise false.
 */
 
 template <typename T>
-bool LinkedQueue<T>::dequeue(T& frntEntry)
+T* LinkedQueue<T>::dequeue()
 {
 	if (isEmpty())
-		return false;
+		return NULL;
 
 	Node<T>* nodeToDeletePtr = frontPtr;
-	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
 	// Queue is not empty; remove front
 	if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue
 		backPtr = nullptr;
-
+	T* item = new T(nodeToDeletePtr->getItem());
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
 
-	return true;
+	return item;
 }
+
 
 
 
@@ -130,7 +135,7 @@ template<typename T>
 {
 	 T K;
 	 cout << "\nQueue contents: ";
-	 while (this->dequeue(K))
+	 while (this->dequeue())
 		 cout << K << " ";
 	 cout << endl;
 }
@@ -141,8 +146,8 @@ template <typename T>
 LinkedQueue<T>::~LinkedQueue()
 {
 	
-	T temp;
-	while (dequeue(temp));
+	//T temp;
+	while (dequeue());
 
 }
 

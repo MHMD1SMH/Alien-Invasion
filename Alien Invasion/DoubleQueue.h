@@ -10,14 +10,14 @@ class DoubleQueue
 private:
 	DoubleNode<T>* backPtr;
 	DoubleNode<T>* frontPtr;
-	int counter;
+	int counter=0;
 public:
 	DoubleQueue();
 	DoubleNode<T>* getFrnt() { return frontPtr; }
 	bool isEmpty() const;
 	bool enqueue(const T& newEntry);
-	bool dequeueFront(T& frntEntry);
-	bool dequeueBack(T& frntEntry);
+	T* dequeueFront();
+	T* dequeueBack();
 	bool peek(T& frntEntry)  const;
 	void PrintQueue();
 	int getCounter() { return counter; }
@@ -92,13 +92,13 @@ Output: True if the operation is successful; otherwise false.
 */
 
 template <typename T>
-bool DoubleQueue<T>::dequeueFront(T& frntEntry)
+T* DoubleQueue<T>::dequeueFront()
 {
 	if (isEmpty())
-		return false;
+		return NULL;
 
 	DoubleNode<T>* nodeToDeletePtr = frontPtr;
-	frntEntry = frontPtr->getItem();
+	T* item = new T(backPtr->getItem());
 	frontPtr = frontPtr->getNext();
 	if (frontPtr)
 	{
@@ -112,17 +112,17 @@ bool DoubleQueue<T>::dequeueFront(T& frntEntry)
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
 	this->counter--;
-	return true;
+	return item;
 }
 
 template <typename T>
-bool DoubleQueue<T>::dequeueBack(T& backEntry)
+T* DoubleQueue<T>::dequeueBack()
 {
 	if (isEmpty())
-		return false;
+		return NULL;
 
 	DoubleNode<T>* nodeToDeletePtr = backPtr;
-	backEntry = backPtr->getItem();
+	T* item = new T(backPtr->getItem());
 	backPtr = backPtr->getprev();
 	backPtr->setNext(NULL);
 	// Queue is not empty; remove Back
@@ -132,7 +132,7 @@ bool DoubleQueue<T>::dequeueBack(T& backEntry)
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
 	this->counter--;
-	return true;
+	return item;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -158,9 +158,9 @@ bool DoubleQueue<T>::peek(T& frntEntry) const
 template<typename T>
 void DoubleQueue<T>::PrintQueue()
 {
-	T K;
+	T* K;
 	cout << "\nQueue contents: ";
-	while (this->dequeueFront(K))
+	while (K=this->dequeueFront())
 		cout << K << " ";
 	cout << endl;
 }
@@ -171,7 +171,6 @@ template <typename T>
 DoubleQueue<T>::~DoubleQueue()
 {
 
-	T temp;
-	while (dequeueFront(temp));
+	while (dequeueFront());
 
 }

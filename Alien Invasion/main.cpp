@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-#include "Drone.h"
 #include "earthArmy.h"
 
 int main() {
@@ -11,15 +10,23 @@ int main() {
 	p.minHealth = 10;
 	p.minPower = 5;
 	p.maxPower = 25;
-	p.n = 7;
+	p.n = 9;
 	p.prob = 100;
 
 
 	earthArmy ea;
 	alienArmy aa;
+	Killedlist KL;
 	aa.Generate(0,50,90,p);
 	ea.Generate(0,50,90,p);
-	ea.EGs.egState();
-	aa.ADs.PrintQueue();
+	ea.state();
+	aa.state();
+	KL.addUnit(aa.ADs.dequeueBack());
+	KL.addUnit(aa.ASs.dequeue());
+	KL.addUnit(aa.AMs.selectRandomMonster());
+
+	KL.addUnit(ea.EGs.getUnit());
+	KL.PrintQueue();
+	
 	return 0;
 }

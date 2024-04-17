@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Soliders.h" />
     <ClInclude Include="DoubleNode.h" />
     <ClInclude Include="DoubleQueue.h" />
     <ClInclude Include="Drone.h" />
     <ClInclude Include="earthArmy.h" />
     <ClInclude Include="earthGunnery.h" />
     <ClInclude Include="earthTanks.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="priNode.h" />
     <ClInclude Include="priQueue.h" />

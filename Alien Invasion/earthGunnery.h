@@ -36,6 +36,10 @@ private:
 
 public: 
     gunneryUnites() {};
+    earthGunnery* getUnit() {
+        int x = 10;
+        return *Gunneries.dequeue(x);
+    }
     gunneryUnites(int h, int p, int ac,int id) : earthGunnery(h, p, ac,id) {
         tEG = new earthGunnery(h, p, ac,id);
         rank = (h / 100.0) * p;
@@ -50,11 +54,11 @@ public:
     void egState() {
         priQueue <earthGunnery*> tGunneries = Gunneries;
         int x = 0;
-        cout << "\nEarth Gunneries unites ";
+        cout <<"\n"<< tGunneries.getCounter() << " EG" <<" [";
 
         while (tGunneries.print(tEG, x)) {
-            cout <<'\t' << tEG->getAttackCapacity();
+            cout <<'\t' << tEG->getID() <<',';
         }
-        
+        cout <<"]";
     };
 };

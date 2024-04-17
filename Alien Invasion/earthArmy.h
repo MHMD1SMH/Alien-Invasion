@@ -1,5 +1,6 @@
 #include "earthGunnery.h"
 #include "Drone.h"
+#include "earthTanks.h"
 #include <stdlib.h>
 struct Params {
 	int minHealth;
@@ -12,14 +13,17 @@ struct Params {
 	int prob;
 };
 
+
 int random(int min , int max) {
 	return min + rand() % max;
 }
 
 class earthArmy
 {
+	int id = 0;
 public:
 	gunneryUnites EGs;
+	tanksUnits ETs;
 	earthArmy() {};
 
 	void Generate(int S, int T, int G ,const Params& par) {
@@ -34,18 +38,19 @@ public:
 			int h = random(par.minHealth, par.maxHealth);
 			int p = random(par.minPower, par.maxPower);
 			int c = random(par.minAttackCapacity, par.maxAttackCapacity);
+			id++;
 			if (B < S)
 			{
 
 			}
 			else if (B < S+T)
 			{
-
+				ETs.addUnit(h,p,c,id);
 			}
 			else
 			{
 
-				EGs.addUnit(h,p,c);
+				EGs.addUnit(h,p,c,id);
 			}
 		}
 	}
@@ -54,7 +59,9 @@ public:
 
 class alienArmy
 {
+	int id = 0;
 public:
+	
 	Drones ADs;
 	alienArmy() {};
 
@@ -66,6 +73,7 @@ public:
 
 		for (int i = 0; i < par.n; i++)
 		{
+			id++;
 			int B = random(1, 100);
 			int h = random(par.minHealth, par.maxHealth);
 			int p = random(par.minPower, par.maxPower);
@@ -81,7 +89,7 @@ public:
 			else
 			{
 
-				ADs.addUnit(h, p, c);
+				ADs.addUnit(h, p, c,id);
 			}
 		}
 	}

@@ -8,6 +8,7 @@ class LinkedStack
 {
 private:
 	Node<T>* frontPtr;
+	int counter = 0;
 public:
 	LinkedStack();
 	bool isEmpty() const;
@@ -15,6 +16,7 @@ public:
 	bool Pop(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	void PrintStack();
+	bool Print(T& frntEntry);
 	~LinkedStack();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -61,12 +63,13 @@ bool LinkedStack<T>::Push(const T& newEntry)
 	// Insert the new node
 	if (isEmpty())	//special case if this is the first node to insert
 		frontPtr = newNodePtr; // The Stack is empty
-	else{
-		newNodePtr->setNext() = frontPtr; // The Stack was not empty
+	else {
+		newNodePtr->setNext(frontPtr) ; // The Stack was not empty
 		frontPtr = newNodePtr;
 	}
+	this->counter++;
 	return true;
-} 
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,11 +92,11 @@ bool LinkedStack<T>::Pop(T& frntEntry)
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
 	// Stack is not empty; remove front
-	
+
 
 	// Free memory reserved for the deleted node
 	delete nodeToDeletePtr;
-
+	this->counter--;
 	return true;
 }
 
@@ -119,6 +122,17 @@ bool LinkedStack<T>::peek(T& frntEntry) const
 	return true;
 
 }
+template <typename T>
+bool LinkedStack<T>::Print(T& frntEntry)
+{
+	if (isEmpty())
+		return false;
+
+	frntEntry = frontPtr->getItem();
+	frontPtr = frontPtr->getNext();
+
+	return true;
+}
 template<typename T>
 void LinkedStack<T>::PrintStack()
 {
@@ -140,4 +154,3 @@ LinkedStack<T>::~LinkedStack()
 
 }
 
-#endif

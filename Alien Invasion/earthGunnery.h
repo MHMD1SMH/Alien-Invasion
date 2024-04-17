@@ -7,11 +7,12 @@ class earthGunnery :
 
 public:
     earthGunnery() { setType("EG"); };
-    earthGunnery(int h, int p, int ac) {
+    earthGunnery(int h, int p, int ac , int id) {
         setHealth(h);
         setPower(p);
         setAttackCapacity(ac);
         setType("EG");
+        setID(id);
     };
     virtual bool Attack(Unit* target) override {
         float Damage = (this->getPower() * (this->getHealth() / 100)) / (sqrt(target->getHealth()));
@@ -35,21 +36,22 @@ private:
 
 public: 
     gunneryUnites() {};
-    gunneryUnites(int h, int p, int ac) : earthGunnery(h, p, ac) {
-        tEG = new earthGunnery(h, p, ac);
+    gunneryUnites(int h, int p, int ac,int id) : earthGunnery(h, p, ac,id) {
+        tEG = new earthGunnery(h, p, ac,id);
         rank = (h / 100.0) * p;
         Gunneries.enqueue(tEG, rank);
 
     };
-    void addUnit(int h, int p, int ac) {
+    void addUnit(int h, int p, int ac,int id) {
         double rank = (h / 100.0) * p;
-        tEG = new earthGunnery(h, p, ac);
+        tEG = new earthGunnery(h, p, ac,id);
         Gunneries.enqueue(tEG, rank);
     };
     void egState() {
         priQueue <earthGunnery*> tGunneries = Gunneries;
         int x = 0;
         cout << "\nEarth Gunneries unites ";
+
         while (tGunneries.print(tEG, x)) {
             cout <<'\t' << tEG->getAttackCapacity();
         }

@@ -2,10 +2,11 @@
 #include <string>
 using namespace std;
 #include <iostream>
+
 class Unit
 {
 private:
-	static int Id;
+	int Id;
 	string Type;
 	int Health;
 	int Power;
@@ -15,8 +16,8 @@ public:
 	void setType(string type) { Type = type; };
 	string getType() const { return Type; };
 
-	static void IncID() { Id += 1; };
-	int getID() const { return Id; };
+	void setID(int n) { Id = n; }
+	int getID() const { return Id; };	
 
 	void setPower(int Power) { this->Power = Power; };
 	int getPower() const { return Power; };

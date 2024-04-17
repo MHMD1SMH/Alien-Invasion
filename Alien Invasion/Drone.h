@@ -9,10 +9,11 @@ public:
 	Drone() {
 		this->setType("Drone");
 	};
-	Drone(int h, int p, int ac) {
+	Drone(int h, int p, int ac,int id) {
 		setHealth(h);
 		setPower(p);
 		setAttackCapacity(ac);
+		setID(id);
 		setType("Drone");
 	};
 	Drone(Drone* K) {
@@ -29,16 +30,15 @@ public:
 		K->decHel(Damage);
 
 		return true;
-
 	}
 };
 
 class Drones : public DoubleQueue<Drone>
 {
 public:
-	void addUnit(int h, int p, int ac) {
+	void addUnit(int h, int p, int ac,int id) {
 		
-		Drone tAD = new Drone(h, p, ac);
+		Drone tAD = new Drone(h, p, ac,id);
 		this->enqueue(tAD);
 	};
 	void PrintQueue() {
@@ -49,7 +49,7 @@ public:
 		while (ptr)
 		{
 			K = ptr->getItem();
-			cout << K.getType() << " ID :"  << "power :" << K.getPower() << endl;
+			cout << K.getType() << " ID :"<<  "power :" << K.getPower() << endl;
 			ptr =ptr->getNext();
 		}
 		cout << endl;

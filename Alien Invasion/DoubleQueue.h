@@ -10,6 +10,7 @@ class DoubleQueue
 private:
 	DoubleNode<T>* backPtr;
 	DoubleNode<T>* frontPtr;
+	int counter;
 public:
 	DoubleQueue();
 	DoubleNode<T>* getFrnt() { return frontPtr; }
@@ -19,6 +20,7 @@ public:
 	bool dequeueBack(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	void PrintQueue();
+	int getCounter() { return counter; }
 	~DoubleQueue();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -74,6 +76,7 @@ bool DoubleQueue<T>::enqueue(const T& newEntry)
 	}
 
 	backPtr = newNodePtr; // New node is the last node now
+	this->counter++;
 	return true;
 } // end enqueue
 
@@ -108,7 +111,7 @@ bool DoubleQueue<T>::dequeueFront(T& frntEntry)
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	this->counter--;
 	return true;
 }
 
@@ -128,7 +131,7 @@ bool DoubleQueue<T>::dequeueBack(T& backEntry)
 
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	this->counter--;
 	return true;
 }
 

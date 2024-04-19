@@ -5,14 +5,21 @@ class earthTanks :
     public Unit
 {
 public:
-    earthTanks() {};
-    earthTanks(int h, int p, int ac,int id) {
+    earthTanks() { setType("ET"); };
+    earthTanks(int h, int p, int ac, int id) {
         setHealth(h);
         setPower(p);
         setAttackCapacity(ac);
         setType("ET");
         setID(id);
     };
+    earthTanks(earthTanks* K) {
+        this->setType(K->getType());
+        this->setAttackCapacity(K->getAttackCapacity());
+        this->setHealth(K->getHealth());
+        this->setPower(K->getPower());
+        this->setID(K->getID());
+    }
     virtual bool Attack(Unit* target) override {
         float Damage = (this->getPower() * (this->getHealth() / 100.0)) / (sqrt(target->getHealth()));
         if (target) {
@@ -26,31 +33,32 @@ public:
 
 
 };
-class tanksUnits : public earthTanks
+class tanksUnits : public LinkedStack<earthTanks>
 {
-private:
-    earthTanks* tET = NULL;
-    LinkedStack <earthTanks*> tanks;
+
 public:
     tanksUnits() {};
-    tanksUnits(int h, int p, int ac,int id) : earthTanks(h, p, ac,id) {
-        tET = new earthTanks(h, p, ac,id);
-        tanks.Push(tET);
 
+
+    void addUnit(int h, int p, int ac, int id) {
+        earthTanks* tET = new earthTanks(h, p, ac, id);
+        this->Push(tET);
     };
-    void addUnit(int h, int p, int ac,int id) {
-        tET = new earthTanks(h, p, ac,id);
-        tanks.Push(tET);
-    };
+
     void etState() {
-        LinkedStack <earthTanks*> tTanks = tanks;
-        cout << "\n" << tTanks.getCounter() << " ET" << " [";
-
-        while (tTanks.Print(tET)) {
-            cout << '\t' << tET->getID() << ',';
+        earthTanks K;
+        Node<earthTanks>* ptr;
+        ptr = this->getFrnt();
+        cout << "\n" << this->getCounter() << " ET" << " [";
+        while (ptr)
+        {
+            K = ptr->getItem();
+            cout << K.getID() << ", ";
+            ptr = ptr->getNext();
         }
-        cout << "]";
-    };
+        cout << "]" << endl;
+    }
+
 
 
 

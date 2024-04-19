@@ -15,12 +15,14 @@ public:
 		setAttackCapacity(ac);
 		setID(id);
 		setType("ES");
+		
 	};
 	ES(ES* K) {
 		this->setType(K->getType());
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
+		this->setID(K->getID());
 	}
 	virtual bool Attack(Unit* K) override {
 		if (K->getType() == "AS") {
@@ -40,7 +42,8 @@ class ESoliders : public LinkedQueue<ES>
 {
 public:
 	void addUnit(int h, int p, int ac, int id) {
-		this->enqueue(ES(h, p, ac, id));
+
+		this->enqueue(new ES(h, p, ac, id));
 	}
 	
 	void PrintQueue() {
@@ -51,7 +54,7 @@ public:
 		while (ptr)
 		{
 			K = ptr->getItem();
-			cout << '\t' << K.getID() << ',';
+			cout << K.getID() << ", ";
 			ptr = ptr->getNext();
 		}
 		cout << "]" << endl;
@@ -76,6 +79,7 @@ public:
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
+		this->setID(K->getID());
 	}
 	virtual bool Attack(Unit* K) override {
 		if (K->getType() == "AS") {
@@ -106,7 +110,7 @@ public:
 		while (ptr)
 		{
 			K = ptr->getItem();
-			cout << '\t' << K.getID() << ',';
+			cout << K.getID() << ", ";
 			ptr = ptr->getNext();
 		}
 		cout << "]" << endl;

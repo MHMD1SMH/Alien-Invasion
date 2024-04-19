@@ -65,10 +65,11 @@ public:
 	}
 
 	void insert(Monster* m) {
-
-		arrofmonsters[arrsize] = m;
-		arrsize++;
-
+		if (m)
+		{
+			arrofmonsters[arrsize] = m;
+			arrsize++;
+		}
 	};
 
 
@@ -77,6 +78,10 @@ public:
 	void addUnit(int h, int p, int ac, int id) {
 
 		Monster* AM = new Monster(h, p, ac, id);
+		if (arrsize == 100)
+		{
+			return;
+		}
 		this->insert(AM);
 	};
 	void PrintArr() {

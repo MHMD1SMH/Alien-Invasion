@@ -98,7 +98,7 @@ T* DoubleQueue<T>::dequeueFront()
 		return NULL;
 
 	DoubleNode<T>* nodeToDeletePtr = frontPtr;
-	T* item = new T(backPtr->getItem());
+	T* item = new T(frontPtr->getItem());
 	frontPtr = frontPtr->getNext();
 	if (frontPtr)
 	{

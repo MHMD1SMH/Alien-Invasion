@@ -50,7 +50,7 @@ public:
 		while (ptr)
 		{
 			K = ptr->getItem();
-			cout << '\t' << K.getID() << ',';
+			cout  << K.getID() << ", ";
 			ptr =ptr->getNext();
 		}
 		cout << "]" << endl;

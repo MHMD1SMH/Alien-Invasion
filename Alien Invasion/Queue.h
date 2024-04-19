@@ -103,7 +103,7 @@ T* LinkedQueue<T>::dequeue()
 	T* item = new T(nodeToDeletePtr->getItem());
 	// Free memory reserved for the dequeued node
 	delete nodeToDeletePtr;
-
+	counter--;
 	return item;
 }
 

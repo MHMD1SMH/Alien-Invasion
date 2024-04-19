@@ -7,13 +7,20 @@ class earthGunnery :
 
 public:
     earthGunnery() { setType("EG"); };
-    earthGunnery(int h, int p, int ac , int id) {
+    earthGunnery(int h, int p, int ac, int id) {
         setHealth(h);
         setPower(p);
         setAttackCapacity(ac);
         setType("EG");
         setID(id);
     };
+    earthGunnery(earthGunnery* K) {
+        this->setType(K->getType());
+        this->setAttackCapacity(K->getAttackCapacity());
+        this->setHealth(K->getHealth());
+        this->setPower(K->getPower());
+        this->setID(K->getID());
+    }
     virtual bool Attack(Unit* target) override {
         float Damage = (this->getPower() * (this->getHealth() / 100)) / (sqrt(target->getHealth()));
         if (target) {
@@ -27,38 +34,30 @@ public:
 
 };
 
- 
-class gunneryUnites :public earthGunnery {
-private:
-    double rank;
-    earthGunnery* tEG = NULL;
-    priQueue <earthGunnery*> Gunneries;
 
-public: 
+class gunneryUnites :public priQueue<earthGunnery> {
+
+public:
     gunneryUnites() {};
-    earthGunnery* getUnit() {
-        int x = 10;
-        return *Gunneries.dequeue(x);
-    }
-    gunneryUnites(int h, int p, int ac,int id) : earthGunnery(h, p, ac,id) {
-        tEG = new earthGunnery(h, p, ac,id);
-        rank = (h / 100.0) * p;
-        Gunneries.enqueue(tEG, rank);
 
-    };
-    void addUnit(int h, int p, int ac,int id) {
+
+    void addUnit(int h, int p, int ac, int id) {
         double rank = (h / 100.0) * p;
-        tEG = new earthGunnery(h, p, ac,id);
-        Gunneries.enqueue(tEG, rank);
+        earthGunnery tEG = new earthGunnery(h, p, ac, id);
+        this->enqueue(tEG, rank);
     };
     void egState() {
-        priQueue <earthGunnery*> tGunneries = Gunneries;
-        int x = 0;
-        cout <<"\n"<< tGunneries.getCounter() << " EG" <<" [";
-
-        while (tGunneries.print(tEG, x)) {
-            cout <<'\t' << tEG->getID() <<',';
+        earthGunnery K;
+        priNode<earthGunnery>* ptr;
+        ptr = this->getHead();
+        cout << "\n" << this->getCounter() << " EG" << " [";
+        while (ptr)
+        {
+            int z;
+            K = ptr->getItem(z);
+            cout << K.getID() << ", ";
+            ptr = ptr->getNext();
         }
-        cout <<"]";
-    };
+        cout << "]" << endl;
+    }
 };

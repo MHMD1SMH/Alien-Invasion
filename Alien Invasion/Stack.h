@@ -1,4 +1,3 @@
-
 #include <iostream>
 using namespace std;
 #include "Node.h"
@@ -18,6 +17,7 @@ public:
 	void PrintStack();
 	int getCounter();
 	bool Print(T& frntEntry);
+	Node<T>* getFrnt() { return frontPtr; }
 	~LinkedStack();
 };
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ Function: Satck()
 The constructor of the Stack class.
 */
 template <typename T>
-int LinkedStack<T>::getCounter() {return counter;}
+int LinkedStack<T>::getCounter() { return counter; }
 
 template <typename T>
 LinkedStack<T>::LinkedStack()
@@ -66,7 +66,7 @@ bool LinkedStack<T>::Push(const T& newEntry)
 	if (isEmpty())	//special case if this is the first node to insert
 		frontPtr = newNodePtr; // The Stack is empty
 	else {
-		newNodePtr->setNext(frontPtr) ; // The Stack was not empty
+		newNodePtr->setNext(frontPtr); // The Stack was not empty
 		frontPtr = newNodePtr;
 	}
 	this->counter++;
@@ -155,4 +155,3 @@ LinkedStack<T>::~LinkedStack()
 	while (Pop());
 
 }
-

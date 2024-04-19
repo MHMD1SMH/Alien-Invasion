@@ -11,13 +11,13 @@ class priQueue
     int counter = 0;
 public:
     priQueue() : head(nullptr) {}
-
+    priNode<T>* getHead() { return head; };
     ~priQueue() {
         T tmp;
         int p;
-        while (dequeue( p));
+        while (dequeue(p));
     }
-    int getCounter() {return counter;};
+    int getCounter() { return counter; };
     //insert the new node in its correct position according to its priority
     void enqueue(const T& data, int priority) {
         priNode<T>* newNode = new priNode<T>(data, priority);
@@ -71,6 +71,5 @@ public:
         head = head->getNext();
         return true;
     }
-    
-};
 
+};

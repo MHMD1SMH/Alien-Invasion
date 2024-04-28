@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Soliders.h" />
     <ClInclude Include="DoubleNode.h" />
     <ClInclude Include="DoubleQueue.h" />

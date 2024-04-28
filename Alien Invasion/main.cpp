@@ -1,37 +1,37 @@
 #include <iostream>
 using namespace std;
-#include "earthArmy.h"
 
-
+#include "Game.h"
 void action(earthArmy& ea, alienArmy& aa, Killedlist& kl) {
 
 	int x = random(1,60);
 	if (x > 0 && x < 10) {
-		ea.ESs.enqueue(ea.ESs.dequeue());
+		ea.getESs()->enqueue(ea.getESs()->dequeue());
 	}
 	else if (x < 20) {
 
-		kl.addUnit(ea.ETs.Pop());
+		kl.addUnit(ea.getETs()->Pop());
 	}
 	else if (x < 30) {
 		int z;
-		priNode<earthGunnery>* ptr = ea.EGs.getHead();
+		priNode<earthGunnery>* ptr = ea.getEGS()->getHead();
 		if (ptr)
 		{
 			earthGunnery item = ptr->getItem(z);
 			while (ptr)
 			{
-				cout << "earthGunnery" << item.getID() << "Health is " << item.getHealth() << " before \n";
+				item = ptr->getItem(z);
+				cout << "earthGunnery " << item.getID() << " Health is " << item.getHealth() << " before \n";
 				item.decHel(item.getHealth() / 2);
-				cout << "earthGunnery" << item.getID() << "Health is " << item.getHealth() << " after \n";
+				cout << "earthGunnery " << item.getID() << " Health is " << item.getHealth() << " after \n";
 				ptr = ptr->getNext();
 			}
 		}
 	}
 	else if (x < 40) {
 		int counter = 0;
-		while (aa.ASs.getCounter() >= counter && counter <= 5) {
-			aa.ASs.enqueue(aa.ASs.dequeue());
+		while (aa.getASs()->getCounter() >= counter && counter <= 5) {
+			aa.getASs()->enqueue(aa.getASs()->dequeue());
 			counter++;
 		}
 
@@ -39,23 +39,23 @@ void action(earthArmy& ea, alienArmy& aa, Killedlist& kl) {
 	else if (x < 50) {
 		Monsters temp;
 		for (int i = 0; i < 5; ++i) {
-			temp.insert(aa.AMs.selectRandomMonster());
+			temp.insert(aa.getAMs()->selectRandomMonster());
 		}
 		for (int i = 0; i < 5; ++i) {
-			aa.AMs.insert(temp.selectRandomMonster());
+			aa.getAMs()->insert(temp.selectRandomMonster());
 		}
 	}
 	else if (x < 60) {
 		for (int i = 0; i < 3; i++) {
-			kl.addUnit(aa.ADs.dequeueFront());
+			kl.addUnit(aa.getADs()->dequeueFront());
 		}
 		for (int i = 0; i < 3; i++) {
-			kl.addUnit(aa.ADs.dequeueBack());
+			kl.addUnit(aa.getADs()->dequeueBack());
 		}
 	}
 };
 int main() {
-	Params earthData;
+	/*Params earthData;
 	Params alenData;
 
 	readFile(earthData, alenData);
@@ -67,13 +67,15 @@ int main() {
 	aa.state();
 	for (int i = 0; i < 50; i++)
 	{
-		action(ea, aa, KL);
+		action(ea,aa,KL);
 		ea.Generate(earthData);
 		aa.Generate(alenData);
 	}
 	ea.state();
 	aa.state();
-	KL.PrintQueue();
+	KL.PrintQueue();*/
+	Game g;
+	g.Go();
 
 	return 0;
 }

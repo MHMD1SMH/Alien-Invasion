@@ -24,36 +24,13 @@ public:
 		this->setID(K->getID());
 	}
 	virtual bool Attack(Unit* K) override {
-		float Damage = (this->getPower() * (this->getHealth() / 100)) / (sqrt(K->getHealth()));
-		if (!(K->getType() == "Tank" || K->getType() == "Gunnery"))
+		float Damage = (this->getPower() * (this->getHealth())) / (sqrt(K->getHealth()));
+		if (!K)
 			return false;
 
 		K->decHel(Damage);
 
 		return true;
-	}
-};
-
-class Drones : public DoubleQueue<Drone>
-{
-public:
-	void addUnit(int h, int p, int ac,int id) {
-		
-		Drone tAD = new Drone(h, p, ac,id);
-		this->enqueue(tAD);
-	};
-	void PrintQueue() {
-		Drone K;
-		DoubleNode<Drone>* ptr;
-		ptr = this->getFrnt();
-		cout << "\n" << this->getCounter() << " AD" << " [";
-		while (ptr)
-		{
-			K = ptr->getItem();
-			cout  << K.getID() << ", ";
-			ptr =ptr->getNext();
-		}
-		cout << "]" << endl;
 	}
 };
 

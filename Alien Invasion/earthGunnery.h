@@ -35,29 +35,3 @@ public:
 };
 
 
-class gunneryUnites :public priQueue<earthGunnery> {
-
-public:
-    gunneryUnites() {};
-
-
-    void addUnit(int h, int p, int ac, int id) {
-        double rank = (h / 100.0) * p;
-        earthGunnery tEG = new earthGunnery(h, p, ac, id);
-        this->enqueue(tEG, rank);
-    };
-    void egState() {
-        earthGunnery K;
-        priNode<earthGunnery>* ptr;
-        ptr = this->getHead();
-        cout << "\n" << this->getCounter() << " EG" << " [";
-        while (ptr)
-        {
-            int z;
-            K = ptr->getItem(z);
-            cout << K.getID() << ", ";
-            ptr = ptr->getNext();
-        }
-        cout << "]" << endl;
-    }
-};

@@ -20,6 +20,12 @@ public:
 		this->setPower(K->getPower());
 		this->setID(K->getID());
 	}
+	Unit(int h, int p, int ac, int id) {
+		setHealth(h);
+		setPower(p);
+		setAttackCapacity(ac);
+		setID(id);
+	};
 	void setType(string type) { Type = type; };
 	string getType() const { return Type; };
 
@@ -37,6 +43,11 @@ public:
 	int getAttackCapacity() const { return AttackCapacity; };
 
 	virtual bool Attack(Unit* K) =0;
-	
+	friend ostream& operator << (ostream& os, const Unit& K) {
+		cout << (K).getID();
+		return os;
+	}
 };
+
+
 

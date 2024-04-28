@@ -10,8 +10,8 @@ public:
         setHealth(h);
         setPower(p);
         setAttackCapacity(ac);
-        setType("ET");
         setID(id);
+        setType("ET");
     };
     earthTanks(earthTanks* K) {
         this->setType(K->getType());
@@ -33,33 +33,4 @@ public:
 
 
 };
-class tanksUnits : public LinkedStack<earthTanks>
-{
 
-public:
-    tanksUnits() {};
-
-
-    void addUnit(int h, int p, int ac, int id) {
-        earthTanks* tET = new earthTanks(h, p, ac, id);
-        this->Push(tET);
-    };
-
-    void etState() {
-        earthTanks K;
-        Node<earthTanks>* ptr;
-        ptr = this->getFrnt();
-        cout << "\n" << this->getCounter() << " ET" << " [";
-        while (ptr)
-        {
-            K = ptr->getItem();
-            cout << K.getID() << ", ";
-            ptr = ptr->getNext();
-        }
-        cout << "]" << endl;
-    }
-
-
-
-
-};

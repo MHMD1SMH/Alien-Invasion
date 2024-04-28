@@ -13,7 +13,6 @@ public:
     priQueue() : head(nullptr) {}
     priNode<T>* getHead() { return head; };
     ~priQueue() {
-        T tmp;
         int p;
         while (dequeue(p));
     }
@@ -62,13 +61,22 @@ public:
     bool isEmpty() const {
         return head == nullptr;
     }
-    bool print(T& topEntry, int& pri) {
+    bool print() {
         if (isEmpty())
             return false;
+        T K;
+        priNode<T>* ptr;
+        int z;
+        ptr = this->head;;
+        cout << "[";
 
-        //priNode<T>* temp = head;
-        topEntry = head->getItem(pri);
-        head = head->getNext();
+        while (ptr)
+        {
+            K = ptr->getItem(z);
+            cout << K << ", ";
+            ptr = ptr->getNext();
+        }
+        cout << "]" << endl;
         return true;
     }
 

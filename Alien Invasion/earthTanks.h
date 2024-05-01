@@ -6,12 +6,13 @@ class earthTanks :
 {
 public:
     earthTanks() { setType("ET"); };
-    earthTanks(int h, int p, int ac, int id) {
+    earthTanks(int h, int p, int ac, int id , int timejoin) {
         setHealth(h);
         setPower(p);
         setAttackCapacity(ac);
         setID(id);
         setType("ET");
+        this->getTime()->setTj(timejoin);
     };
     earthTanks(earthTanks* K) {
         this->setType(K->getType());

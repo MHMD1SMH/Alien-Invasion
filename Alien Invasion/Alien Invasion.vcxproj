@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Generator.h" />
     <ClInclude Include="Soliders.h" />
     <ClInclude Include="DoubleNode.h" />
     <ClInclude Include="DoubleQueue.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="priQueue.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Unit.h" />
   </ItemGroup>
   <ItemGroup>

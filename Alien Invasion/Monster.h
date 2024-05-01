@@ -13,12 +13,13 @@ public:
 	Monster() {
 		this->setType("Monster");
 	};
-	Monster(int h, int p, int ac, int id) {
+	Monster(int h, int p, int ac, int id ,int timejoin) {
 		setHealth(h);
 		setPower(p);
 		setAttackCapacity(ac);
 		setType("Monster");
 		setID(id);
+		this->getTime()->setTj(timejoin);
 	};
 	Monster(Monster* K) {
 		this->setType(K->getType());
@@ -75,9 +76,9 @@ public:
 
 
 
-	void addUnit(int h, int p, int ac, int id) {
+	void addUnit(int h, int p, int ac, int id,int timesep) {
 
-		Monster* AM = new Monster(h, p, ac, id);
+		Monster* AM = new Monster(h, p, ac, id, timesep);
 		if (arrsize == 100)
 		{
 			return;

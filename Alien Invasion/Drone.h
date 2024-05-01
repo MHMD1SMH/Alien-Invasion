@@ -9,12 +9,13 @@ public:
 	Drone() {
 		this->setType("Drone");
 	};
-	Drone(int h, int p, int ac,int id) {
+	Drone(int h, int p, int ac,int id,int timejoin) {
 		setHealth(h);
 		setPower(p);
 		setAttackCapacity(ac);
 		setID(id);
 		setType("Drone");
+		this->getTime()->setTj(timejoin);
 	};
 	Drone(Drone* K) {
 		this->setType(K->getType());

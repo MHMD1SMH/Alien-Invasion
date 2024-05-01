@@ -7,12 +7,13 @@ class earthGunnery :
 
 public:
     earthGunnery() { setType("EG"); };
-    earthGunnery(int h, int p, int ac, int id) {
+    earthGunnery(int h, int p, int ac, int id ,int timejoin) {
         setHealth(h);
         setPower(p);
         setAttackCapacity(ac);
         setType("EG");
         setID(id);
+        this->getTime()->setTj(timejoin);
     };
     earthGunnery(earthGunnery* K) {
         this->setType(K->getType());

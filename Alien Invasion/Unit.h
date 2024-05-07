@@ -8,6 +8,7 @@ class Unit
 private:
 	int Id;
 	string Type;
+	int inHealth;
 	int Health;
 	int Power;
 	int AttackCapacity;
@@ -20,6 +21,7 @@ public:
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
 		this->setID(K->getID());
+		this->setInHealth(K->getInHealth());
 	}
 	Unit(int h, int p, int ac, int id , int timejoin) {
 		setHealth(h);
@@ -27,6 +29,7 @@ public:
 		setAttackCapacity(ac);
 		setID(id);
 		T->setTj(timejoin);
+		this->setInHealth(h);
 	};
 	void setType(string type) { Type = type; };
 	string getType() const { return Type; };
@@ -39,7 +42,11 @@ public:
 
 	void setHealth(int Health) { this->Health = Health; };
 	void decHel(int n) { this->Health -= n; };
+	void incHel(int n) { this->Health += n; };
 	int getHealth() const { return Health; };
+
+	void setInHealth(int n) { inHealth = n; }
+	int getInHealth() { return inHealth; }
 
 	void setAttackCapacity(int Cap) { this->AttackCapacity = Cap; };
 	int getAttackCapacity() const { return AttackCapacity; };

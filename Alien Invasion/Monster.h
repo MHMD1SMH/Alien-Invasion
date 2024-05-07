@@ -20,15 +20,17 @@ public:
 		setType("Monster");
 		setID(id);
 		this->getTime()->setTj(timejoin);
+		this->setInHealth(h);
 	};
 	Monster(Monster* K) {
 		this->setType(K->getType());
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
+		this->setInHealth(K->getInHealth());
 	}
 	virtual bool Attack(Unit* K) override {
-		float Damage = (this->getPower() * (this->getHealth() / 100)) / (sqrt(K->getHealth()));
+		float Damage = (this->getPower() * (this->getHealth() / 100.0)) / (sqrt(K->getHealth()));
 		if (!(K->getType() == "Tank" || K->getType() == "EarthSoliders"))
 			return false;
 

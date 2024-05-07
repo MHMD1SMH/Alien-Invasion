@@ -74,8 +74,22 @@ int main() {
 	ea.state();
 	aa.state();
 	KL.PrintQueue();*/
-	Game g;
-	g.Go();
+	/*Game g;
+	g.Go();*/
+
+	Params earthData;
+	Params alenData;
+	Killedlist* KL = new Killedlist;
+	readFile(earthData, alenData);
+	earthArmy *aa = new earthArmy;
+	earthGenerate(earthData,aa,10);
+	ES* es = new ES(50, 20, 5, 50,5);
+	aa->addToUML(es);
+	es->decHel(48);
+	es->getTime()->setTh(7);
+	aa->heal(10,KL);
+
+	KL->state();
 
 	return 0;
 }

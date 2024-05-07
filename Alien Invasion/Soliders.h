@@ -16,6 +16,7 @@ public:
 		setID(id);
 		setType("ES");
 		this->getTime()->setTj(timejoin);
+		this->setInHealth(h);
 	};
 	ES(ES* K) {
 		this->setType(K->getType());
@@ -23,6 +24,15 @@ public:
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
 		this->setID(K->getID());
+		this->setInHealth(K->getInHealth());
+	}
+	ES(Unit* K) {
+		this->setType(K->getType());
+		this->setAttackCapacity(K->getAttackCapacity());
+		this->setHealth(K->getHealth());
+		this->setPower(K->getPower());
+		this->setID(K->getID());
+		this->setInHealth(K->getInHealth());
 	}
 	virtual bool Attack(Unit* K) override {
 		if (K->getType() == "AS") {
@@ -52,6 +62,7 @@ public:
 		setID(id);
 		setType("AS");
 		this->getTime()->setTj(timejoin);
+		this->setInHealth(h);
 	};
 	AS(AS* K) {
 		this->setType(K->getType());
@@ -59,6 +70,7 @@ public:
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
 		this->setID(K->getID());
+		this->setInHealth(K->getInHealth());
 	}
 	virtual bool Attack(Unit* K) override {
 		if (K->getType() == "AS") {

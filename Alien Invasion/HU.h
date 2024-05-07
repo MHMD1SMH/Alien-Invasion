@@ -1,15 +1,12 @@
 #pragma once
 #include "Unit.h"
-#include "DoubleQueue.h"
-#include <iostream>
-
-class Drone : public Unit
+class HU :public Unit
 {
 public:
-	Drone() {
-		this->setType("Drone");
+	HU() {
+		this->setType("HU");
 	};
-	Drone(int h, int p, int ac,int id,int timejoin) {
+	HU(int h, int p, int ac, int id, int timejoin) {
 		setHealth(h);
 		setPower(p);
 		setAttackCapacity(ac);
@@ -18,7 +15,7 @@ public:
 		this->getTime()->setTj(timejoin);
 		this->setInHealth(h);
 	};
-	Drone(Drone* K) {
+	HU(HU* K) {
 		this->setType(K->getType());
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());
@@ -27,11 +24,11 @@ public:
 		this->setInHealth(K->getInHealth());
 	}
 	virtual bool Attack(Unit* K) override {
-		float Damage = (this->getPower() * (this->getHealth())/100.0) / (sqrt(K->getHealth()));
+		float Heal = (this->getPower() * (this->getHealth())/100.1) / (sqrt(K->getHealth()));
 		if (!K)
 			return false;
 
-		K->decHel(Damage);
+		K->incHel(Heal);
 
 		return true;
 	}

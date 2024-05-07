@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Generator.h" />
+    <ClInclude Include="HU.h" />
     <ClInclude Include="Soliders.h" />
     <ClInclude Include="DoubleNode.h" />
     <ClInclude Include="DoubleQueue.h" />

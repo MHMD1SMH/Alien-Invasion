@@ -9,6 +9,7 @@ class Game
 	int timestep = 0;
 	earthArmy* ea = new earthArmy;
 	alienArmy* aa = new alienArmy;
+	Killedlist * Kl = new Killedlist;
 public:
 
 	Game() {
@@ -46,10 +47,14 @@ public:
 				{
 					cout << EG->getID() << ", ";
 				}
-				if (EG->getHealth() > 0)
+				if (EG->getHealth())
 				{
 					z = (EG->getHealth() / 100.0) * EG->getPower();
 					ea->getEGS()->enqueue(EG, z);
+				}
+				else 
+				{
+					Kl->addUnit(EG);
 				}
 				EG = NULL;
 			}
@@ -67,12 +72,12 @@ public:
 				{
 					cout << ET->getID() << ", ";
 				}
-				if (ET->getHealth() > 0)
+				if (ET->getHealth())
 				{
-
-
 					ea->getETs()->Push(ET);
 				}
+				else
+					Kl->addUnit(ET);
 				ET = NULL;
 			}
 			cout << " ]\n";

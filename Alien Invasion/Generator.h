@@ -71,6 +71,9 @@ void readFile(Params& earthdata, Params& aliendata) {
 					else if (c == 2)
 					{
 						aliendata.unit3 = stoi(token);
+					}else if (c == 3)
+					{
+						aliendata.unit4 = stoi(token);
 					}c++;
 				}
 			}c = 0;
@@ -158,10 +161,14 @@ void earthGenerate(const Params& par , earthArmy* ea ,int timesep) {
 		{
 			ea->getETs()->Push(earthTanks(h, p, c, ea->getID(), timesep));
 		}
-		else
+		else if (B < par.unit1 + par.unit2 + par.unit3)
 		{
 			double rank = (h / 100.0) * p;
 			ea->getEGS()->enqueue(earthGunnery(h, p, c, ea->getID(), timesep), rank);
+		}
+		else
+		{
+			ea->getEHUs()->Push(HU(h,p,c, ea->getID(), timesep));
 		}
 	}
 };

@@ -18,7 +18,7 @@ public:
 		this->getTime()->setTj(timejoin);
 		this->setInHealth(h);
 	};
-	Drone(Drone* K) {
+	Drone(Unit* K) {
 		this->setType(K->getType());
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());

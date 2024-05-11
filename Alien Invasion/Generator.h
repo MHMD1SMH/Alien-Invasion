@@ -194,7 +194,7 @@ void alienGenerate(const Params& par,alienArmy* aa,int timesep) {
 		{
 			aa->getAMs()->addUnit(h, p, c, aa->getID(), timesep);
 		}
-		else
+		else if (B < par.unit1 + par.unit2 + par.unit3)
 		{
 
 			aa->getADs()->enqueue(Drone(h, p, c, aa->getID(), timesep));

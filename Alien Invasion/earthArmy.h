@@ -210,6 +210,7 @@ public:
 		cout << "\n" << ADs->getCounter() << "AD";
 		ADs->PrintQueue();
 
+		cout << "\n";
 		AMs->PrintArr();
 
 		cout << "\n" << ASs->getCounter() << "AS";

@@ -22,6 +22,7 @@ public:
 		return (frontPtr == nullptr);
 	};
 	bool enqueue(const T& newEntry) {
+
 		DoubleNode<T>* newNodePtr = new DoubleNode<T>(newEntry);
 		// Insert the new node
 		if (isEmpty())	//special case if this is the first node to insert

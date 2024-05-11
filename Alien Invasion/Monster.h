@@ -22,11 +22,12 @@ public:
 		this->getTime()->setTj(timejoin);
 		this->setInHealth(h);
 	};
-	Monster(Monster* K) {
+	Monster(Unit* K) {
 		this->setType(K->getType());
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());
 		this->setPower(K->getPower());
+		this->setID(K->getID());
 		this->setInHealth(K->getInHealth());
 	}
 	virtual bool Attack(Unit* K) override {
@@ -51,7 +52,7 @@ class Monsters
 	Monster** arrofmonsters = new Monster * [100];
 public:
 
-
+	int counter() { return arrsize; }
 	Monster* selectRandomMonster() {
 		if (!arrsize)
 			return NULL;

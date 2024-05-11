@@ -15,7 +15,7 @@ public:
 		this->getTime()->setTj(timejoin);
 		this->setInHealth(h);
 	};
-	HU(HU* K) {
+	HU(Unit* K) {
 		this->setType(K->getType());
 		this->setAttackCapacity(K->getAttackCapacity());
 		this->setHealth(K->getHealth());

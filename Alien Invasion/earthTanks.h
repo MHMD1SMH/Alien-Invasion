@@ -15,14 +15,7 @@ public:
         this->getTime()->setTj(timejoin);
         this->setInHealth(h);
     };
-    earthTanks(earthTanks* K) {
-        this->setType(K->getType());
-        this->setAttackCapacity(K->getAttackCapacity());
-        this->setHealth(K->getHealth());
-        this->setPower(K->getPower());
-        this->setID(K->getID());
-        this->setInHealth(K->getInHealth());
-    }earthTanks(Unit* K) {
+    earthTanks(Unit* K) {
         this->setType(K->getType());
         this->setAttackCapacity(K->getAttackCapacity());
         this->setHealth(K->getHealth());

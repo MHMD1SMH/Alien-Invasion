@@ -73,11 +73,11 @@ int main() {
 	}
 	ea.state();
 	aa.state();
-	KL.PrintQueue();*/
-	/*Game g;
+	KL.PrintQueue();
+	Game g;
 	g.Go();*/
 
-	Params earthData;
+	/*Params earthData;
 	Params alenData;
 	Killedlist* KL = new Killedlist;
 	readFile(earthData, alenData);
@@ -89,7 +89,8 @@ int main() {
 	es->getTime()->setTh(7);
 	aa->heal(10,KL);
 
-	KL->state();
+	KL->state();*/
+	
 
 	return 0;
 }

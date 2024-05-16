@@ -196,7 +196,11 @@ public:
 			string ids1 = "";
 			string ids2 = "";
 			for (int i = 0; i < maxcap; i++) {
-				if (timestep % 2 == 0 ||(!ea->getEGS()->isEmpty()&&ea->getETs()->isEmpty()))
+				if (ea->getEGS()->isEmpty() && ea->getETs()->isEmpty())
+				{
+					break;
+				}
+				if (timestep % 2 == 0 && (!ea->getEGS()->isEmpty() && ea->getETs()->isEmpty()))
 				{
 					EG = ea->getEGS()->dequeue(z);
 					if (i < AD1->getAttackCapacity())
@@ -224,7 +228,7 @@ public:
 					}
 					EG = NULL;
 				}
-				else if(timestep % 2 == 1 || (ea->getEGS()->isEmpty() && !ea->getETs()->isEmpty()))
+				else if (timestep % 2 == 1 || (ea->getEGS()->isEmpty() && !ea->getETs()->isEmpty()))
 				{
 					ET = ea->getETs()->Pop();
 					AD1->Attack(ET);
@@ -264,6 +268,8 @@ public:
 				}
 
 			}
+			aa->getADs()->enqueue(AD1);
+			aa->getADs()->enqueue(AD2);
 			cout << " \n";
 
 		}
@@ -271,10 +277,10 @@ public:
 
 	}
 	void Go() {
+		Mode M = Interactive;
 		ea->state();
 		aa->state();
 		cout << "\n \n===============Units fight at current step===============" << "\n";
-		Mode M = Interactive;
 		fight(M, 5);
 
 		ea->state();

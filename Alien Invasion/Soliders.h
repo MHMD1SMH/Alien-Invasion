@@ -29,7 +29,7 @@ public:
 	}
 	virtual bool Attack(Unit* K) override {
 		if (K->getType() == "AS") {
-			float Damage = (this->getPower() * (this->getHealth() / 100)) / (sqrt(K->getHealth()));
+			float Damage = (this->getPower() * (this->getHealth() / 100.0)) / (sqrt(K->getHealth()));
 
 			K->decHel(Damage);
 
@@ -67,7 +67,7 @@ public:
 	}
 	virtual bool Attack(Unit* K) override {
 		if (K->getType() == "AS") {
-			float Damage = (this->getPower() * (this->getHealth() / 100)) / (sqrt(K->getHealth()));
+			float Damage = (this->getPower() * (this->getHealth() / 100.0)) / (sqrt(K->getHealth()));
 
 			K->decHel(Damage);
 

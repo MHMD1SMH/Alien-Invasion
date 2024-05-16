@@ -52,7 +52,7 @@ class Monsters
 	Monster** arrofmonsters = new Monster * [100];
 public:
 
-	int counter() { return arrsize; }
+	int counter ()const { return arrsize; }
 	Monster* selectRandomMonster() {
 		if (!arrsize)
 			return NULL;

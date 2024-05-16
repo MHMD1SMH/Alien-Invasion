@@ -1,5 +1,7 @@
 #pragma once
+#include <algorithm>
 #include "Generator.h"
+#include <string>
 using namespace std;
 
 class Game
@@ -24,7 +26,7 @@ public:
 		earthData.prob = x;
 		alienData.prob = z;
 	}
-	void fight(Mode M) {
+	void fight(Mode M, int timestep) {
 
 		/// ET FIGHT LOGIC
 		if (!ea->getETs()->isEmpty()) {
@@ -181,77 +183,91 @@ public:
 
 
 		//Drones Fight
-		Drone* AD1 = aa->getADs()->dequeueFront();
-		Drone* AD2 = aa->getADs()->dequeueBack();
 
 
-		if (AD1 != AD2 && !aa->getADs()->isEmpty())
+		if (!aa->getADs()->isEmpty() && aa->getADs()->getCounter() > 1)
 		{
+			Drone* AD1 = aa->getADs()->dequeueFront();
+			Drone* AD2 = aa->getADs()->dequeueBack();
 			earthGunnery* EG;
 			earthTanks* ET;
 			int z = 0;
-			if (M == Interactive)
-			{
-				cout << "AD " << AD1->getID() << " shots [";
-			}
-			for (int i = 0; i < AD1->getAttackCapacity(); i++) {
-				if (ea->getEGS()->isEmpty())
+			int maxcap = max(AD1->getAttackCapacity(), AD2->getAttackCapacity());
+			string ids1 = "";
+			string ids2 = "";
+			for (int i = 0; i < maxcap; i++) {
+				if (timestep % 2 == 0 ||(!ea->getEGS()->isEmpty()&&ea->getETs()->isEmpty()))
 				{
-					break;
+					EG = ea->getEGS()->dequeue(z);
+					if (i < AD1->getAttackCapacity())
+					{
+						AD1->Attack(EG);
+						ids1 += (to_string(EG->getID()) += ", ");
+
+					}
+					if (i < AD2->getAttackCapacity())
+					{
+						AD2->Attack(EG);
+						ids2 += (to_string(EG->getID()) += ", ");
+
+					}
+					EG->getTime()->setTa(timestep);
+					if (EG->getHealth())
+					{
+						z = (EG->getHealth() / 100.0) * EG->getPower();
+						ea->getEGS()->enqueue(EG, z);
+					}
+					else
+					{
+						Kl->addUnit(EG);
+						EG->getTime()->setTd(timestep);
+					}
+					EG = NULL;
 				}
-				EG = ea->getEGS()->dequeue(z);
-				AD1->Attack(EG);
+				else if(timestep % 2 == 1 || (ea->getEGS()->isEmpty() && !ea->getETs()->isEmpty()))
+				{
+					ET = ea->getETs()->Pop();
+					AD1->Attack(ET);
+					if (i < AD1->getAttackCapacity())
+					{
+						AD1->Attack(ET);
+						ids1 += (to_string(ET->getID()) += ", ");
+
+					}
+					if (i < AD2->getAttackCapacity())
+					{
+						AD2->Attack(ET);
+						ids2 += (to_string(ET->getID()) += ", ");
+
+					}
+					ET->getTime()->setTa(timestep);
+					if ((ET->getHealth() / ET->getInHealth() * 100) >= 20)
+					{
+						ea->getETs()->Push(ET);
+					}
+					else if (ET->getHealth() <= 0)
+					{
+						Kl->addUnit(ET);
+						ET->getTime()->setTd(timestep);
+					}
+					else {
+						ea->addToUML(ET);
+						ET->getTime()->setTh(timestep);
+					}
+					ET = NULL;
+
+				}
 				if (M == Interactive)
 				{
-					cout << EG->getID() << ", ";
+					cout << "AD " << AD1->getID() << " shots [" << ids1 << "] \n";
+					cout << "AD " << AD2->getID() << " shots [" << ids2 << "] \n";
 				}
-				if (EG->getHealth())
-				{
-					z = (EG->getHealth() / 100.0) * EG->getPower();
-					ea->getEGS()->enqueue(EG, z);
-				}
-				else
-				{
-					Kl->addUnit(EG);
-				}
-				EG = NULL;
-			}
-			cout << " ]\n";
 
+			}
+			cout << " \n";
 
-			if (M == Interactive)
-			{
-				cout << "AD " << AD2->getID() << " shots [";
-			}
-			for (int i = 0; i < AD1->getAttackCapacity(); i++) {
-				if (ea->getETs()->isEmpty())
-				{
-					break;
-				}
-				ET = ea->getETs()->Pop();
-				AD1->Attack(ET);
-				if (M == Interactive)
-				{
-					cout << ET->getID() << ", ";
-				}
-				if ((ET->getHealth() / ET->getInHealth() * 100) >= 20)
-				{
-					ea->getETs()->Push(ET);
-				}
-				else if (ET->getHealth() <= 0)
-				{
-					Kl->addUnit(ET);
-				}
-				else
-					ea->addToUML(ET);
-				ET = NULL;
-			}
-			cout << " ]\n";
 		}
-		if (AD1)
-			aa->getADs()->enqueue(AD1);
-		if (AD2)
-			aa->getADs()->enqueue(AD2);
+
 
 	}
 	void Go() {
@@ -259,7 +275,7 @@ public:
 		aa->state();
 		cout << "\n \n===============Units fight at current step===============" << "\n";
 		Mode M = Interactive;
-		fight(M);
+		fight(M, 5);
 
 		ea->state();
 		aa->state();

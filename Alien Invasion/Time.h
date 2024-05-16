@@ -3,11 +3,11 @@ class Time
 {
 private:
 	//Join Time
-	int Tj;
+	int Tj =0;
 	//first attaced time -> first time this unit got shot
-	int Ta= -1;
+	int Ta = -1;
 	//timestep this unit got destroyed and dismissed from the battle 
-	int Td =-1;
+	int Td = -1;
 	// time to join heal 
 	int Th;
 public:
@@ -15,12 +15,14 @@ public:
 	void setTa(int n) {
 		if (Ta == -1)
 			Ta = n;
-		}
-	void setTd(int n) { 
+	}
+	void setTd(int n) {
 		if (Ta == -1)
 			Td = n;
 	}
-	void setTh(int n) { Th = n; }
+	void setTh(int n) {
+			Th = n;
+	}
 
 	int getTj() const { return Tj; }
 	int getTa() const { return Ta; }
@@ -28,10 +30,10 @@ public:
 	int getTh() const { return Th; }
 
 	//first Attack delay =Ta - Tj
-	int getDf() { return Ta - Tj; }
+	int getDf() const { return Ta - Tj; }
 	//Destruction Delay = Td - Ta
-	int getDd() { return Td - Ta; }
+	int getDd() const { return Td - Ta; }
 	//Battle time = Td - Tj
-	int getDb() { return Td - Tj; }
+	int getDb() const { return Td - Tj; }
 };
 

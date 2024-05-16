@@ -46,7 +46,7 @@ public:
 	int getHealth() const { return Health; };
 
 	void setInHealth(int n) { inHealth = n; }
-	int getInHealth() { return inHealth; }
+	int getInHealth () const { return inHealth; }
 
 	void setAttackCapacity(int Cap) { this->AttackCapacity = Cap; };
 	int getAttackCapacity() const { return AttackCapacity; };

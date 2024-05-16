@@ -61,7 +61,7 @@ public:
 		cout << this->counter << " Units [";
 		while (temp)
 		{
-			cout << temp->getItem()->getID() << ", ";
+			cout << temp->getItem()->getID()<< temp->getItem()->getType() << ", ";
 			temp = temp->getNext();
 		}
 		cout << "]" << endl;
@@ -107,7 +107,7 @@ public:
 
 		}
 	}
-	void heal(int timestep,Killedlist * KL) {
+	void heal(int timestep, Killedlist* KL) {
 		HU* temp = NULL;
 		Unit** tempu = NULL;
 		Unit** injurd = NULL;
@@ -123,7 +123,7 @@ public:
 				}
 				injurd = UML->dequeue(x);
 
-				if (timestep-(*injurd)->getTime()->getTh() >=10)
+				if (timestep - (*injurd)->getTime()->getTh() >= 10)
 				{
 					KL->addUnit(*injurd);
 				}
@@ -179,7 +179,7 @@ public:
 
 	}
 	bool isDead() {
-		return !(EGs->isEmpty() && ESs->isEmpty() && ETs->isEmpty());
+		return !(!EGs->isEmpty() || !ESs->isEmpty() || !ETs->isEmpty());
 	}
 
 };
@@ -217,7 +217,7 @@ public:
 		ASs->PrintQueue();
 	}
 	bool isDead() {
-		return !(ADs->isEmpty() && ASs->isEmpty());
+		return !(!ADs->isEmpty() || !ASs->isEmpty() || AMs->counter());
 	}
 };
 

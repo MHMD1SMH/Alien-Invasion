@@ -73,9 +73,9 @@ int main() {
 	}
 	ea.state();
 	aa.state();
-	KL.PrintQueue();
+	KL.PrintQueue();*/
 	Game g;
-	g.Go();*/
+	g.Go();
 
 	/*Params earthData;
 	Params alenData;

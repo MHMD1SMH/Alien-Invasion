@@ -32,8 +32,7 @@ public:
 	}
 	virtual bool Attack(Unit* K) override {
 		float Damage = (this->getPower() * (this->getHealth() / 100.0)) / (sqrt(K->getHealth()));
-		if (!(K->getType() == "Tank" || K->getType() == "EarthSoliders"))
-			return false;
+		
 
 		K->decHel(Damage);
 
